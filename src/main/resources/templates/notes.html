@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Start page</title>
+</head>
+<body>
+<div class="container">
+<!--    <h1 th:text="Welcome ${user}">My notes</h1>-->
+    <h1>Welcome, <span sec:authentication="name"></span> !</h1>
+
+    <div sec:authorize="isAnonymous()">
+        <form th:action="@{/login}">
+            <!--            <input type="hidden" name="_csrf" value="3e054292-3c36-42bb-a336-206c95c3fa20">-->
+            <input type="submit" class="btn btn-primary" value="Login">
+        </form>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="POST">
+<!--            <input type="hidden" name="_csrf" value="3e054292-3c36-42bb-a336-206c95c3fa20">-->
+            <input type="submit" class="btn btn-danger" value="Logout">
+        </form>
+        <form th:action="@{/}" method="get">
+            <!--        <input hidden th:value="${page}" th:name="page">-->
+            <input th:value="${word != null} ? ${word}" th:name="word" type="text" placeholder="Искать">
+            <button type="submit" class="btn btn-primary">Поиск</button>
+        </form>
+        <div class="col-md-4" th:block th:each="note : ${notes}">
+            <h6 th:text="${note.title}"></h6>
+            <p th:text="${note.body}"></p>
+            <small th:text="${note.creationDate}"></small>
+            <a class="btn btn-primary" th:href="@{'/note/delete/' + ${note.id}}" role="button">Delete</a>
+        </div>
+    </div>
+
+
+
+
+
+<!--    <nav aria-label="Page navigation example">-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
+
+<!--            <li class="page-item" th:each="i : ${#numbers.sequence(1, 5)}">-->
+<!--                <a class="page-link" th:text="${i}" th:href="@{'/page/' + ${i + 1}}" />-->
+<!--            </li>-->
+
+<!--            <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+</div>
+
+</body>
+</html>

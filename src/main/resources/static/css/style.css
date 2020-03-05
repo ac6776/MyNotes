@@ -1,0 +1,21 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+}
+.viewbox {
+  background-color: purple;
+  flex: 1 1 auto;
+}
+.login-form {
+  min-width: 320px;
+  padding: 80px 40px;
+  position: relative;
+  display: block;
+  height: auto;
+  flex: 0 0 auto;
+  height: 100%;
+}
+
+.login-form h4 {
+  padding-bottom: 40px;
+}
