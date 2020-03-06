@@ -20,7 +20,7 @@ public class MainController {
     @GetMapping("/")
     public String notes(Model model, Authentication auth, @RequestParam(value = "word", required = false) String word) {
         if(auth != null) {
-            if (word != null){
+            if (word != null && word.length() != 0){
                 model.addAttribute("notes", noteService.findNotesByUsernameAndKeyword(auth.getName(), word));
             } else {
                 model.addAttribute("notes", noteService.findNoteByUsername(auth.getName()));

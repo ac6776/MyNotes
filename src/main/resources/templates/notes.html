@@ -13,20 +13,32 @@
             crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <title>Start page</title>
+    <title>Main page</title>
 </head>
 <body>
 <div class="mycontainer">
+
+<!--    @ VIEWBOX start==============-->
     <div class="viewbox">
         <div class="container-md mt-5">
 
-<!--            @ HEADER =================== -->
-            <div class="d-flex border-bottom">
-                <div sec:authorize="isAuthenticated()" class="flex-grow-1">
-                    <h1>Welcome, <span sec:authentication="name" class="font-italic">Guest</span> !</h1>
-                </div>
-                <div sec:authorize="isAnonymous()" class="flex-grow-1">
+<!--            @ HEADER (anonimous) =================== -->
+            <div sec:authorize="isAnonymous()" class="d-flex justify-content-center">
+                <div class="border-bottom w-50">
                     <h1>Welcome, <span class="font-italic">Guest</span> !</h1>
+                </div>
+            </div>
+            <!--            @ Ask for authorization ========================-->
+            <div sec:authorize="isAnonymous()" class="mt-3 d-flex justify-content-center">
+                <div class="row w-50">
+                    <h5 class="text-muted">Please, authorize first to see your notes!</h5>
+                </div>
+            </div>
+
+<!--            @ HEADER (authenticated) start=================== -->
+            <div sec:authorize="isAuthenticated()" class="d-flex border-bottom">
+                <div  class="flex-grow-1">
+                    <h1>Welcome, <span sec:authentication="name" class="font-italic">Guest</span> !</h1>
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="form-inline">
@@ -64,14 +76,17 @@
                     </div>
                 </div>
             </div>
+<!--            @ HEADER (authenticated) end=================== -->
 
-    <!--        @ Notes ===============================-->
+<!--        @ Notes start===============================-->
             <div class="mt-3" sec:authorize="isAuthenticated()">
                 <div class="row">
                     <div class="col-md-4 mt-3" th:block th:each="note : ${notes}">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${note.title}">Title</h5>
+<!--                                <h5 class="card-title" th:text="${note.title.length() != 0} ? ${note.title} : ${#strings.substring(${note.body},0,5)}">Title</h5>-->
+                                <h5 class="card-title" th:text="${note.title.length() != 0} ? ${note.title} : ${note.body.substring(0, (note.body.length() >= 10 ? 10 : note.body.length()))} + '...'">Title</h5>
+
                                 <p class="card-text" th:text="${note.body}">
                                     Neque porro quisquam est qui dolorem ipsum quia dolor sit
                                     amet, consectetur, adipisci velit...
@@ -85,18 +100,12 @@
                     </div>
                 </div>
             </div>
-
-    <!--        @ Ask for authorization ========================-->
-            <div class="mt-3" sec:authorize="isAnonymous()">
-                <div class="row">
-                    <h5 class="m-3 text-muted">Please, authorize first to see your notes!</h5>
-                </div>
-            </div>
+<!--        @ Notes end===============================-->
         </div>
     </div>
+<!--    @ VIEWBOX end=======================-->
 
-<!--    @ LOGIN FORM======================-->
-
+<!--    @ LOGIN FORM start======================-->
     <div sec:authorize="isAnonymous()" class="col-md-4 login-form bg-light border-left">
         <h4 class="">Login</h4>
         <form th:action="@{/auth}" method="POST">
@@ -127,6 +136,7 @@
             </div>
         </form>
     </div>
+<!--    @ LOGIN FORM end ======================-->
 </div>
 </body>
 </html>
