@@ -1,7 +1,6 @@
 package com.example.MyNotes.controllers;
 
 import com.example.MyNotes.entities.Note;
-import com.example.MyNotes.repositories.NoteRepository;
 import com.example.MyNotes.services.NoteService;
 import com.example.MyNotes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,6 @@ public class NoteController {
 
     @GetMapping("/delete/{id}")
     public String delNote(@PathVariable("id") Long id){
-//        noteRepository.deleteNoteById(id);
         noteService.deleteNoteById(id);
         return "redirect:/";
     }
