@@ -84,8 +84,8 @@
                     <div class="col-md-4 mt-3" th:block th:each="note : ${notes}">
                         <div class="card">
                             <div class="card-body">
-<!--                                <h5 class="card-title" th:text="${note.title.length() != 0} ? ${note.title} : ${#strings.substring(${note.body},0,5)}">Title</h5>-->
-                                <h5 class="card-title" th:text="${note.title.length() != 0} ? ${note.title} : ${note.body.substring(0, (note.body.length() >= 10 ? 10 : note.body.length()))} + '...'">Title</h5>
+<!--                                <h5 class="card-title" th:text="${note.title.length() != 0} ? ${note.title} : ${note.body.substring(0, (note.body.length() >= 10 ? 10 : note.body.length()))} + '...'">Title</h5>-->
+                                <h5 class="card-title" th:text="${note.title}">Title</h5>
 
                                 <p class="card-text" th:text="${note.body}">
                                     Neque porro quisquam est qui dolorem ipsum quia dolor sit
@@ -135,6 +135,10 @@
                 </div>
             </div>
         </form>
+        <p>User: Alex</p>
+        <p>Password: 123</p>
+        <p>User: Bob</p>
+        <p>Password: 123</p>
     </div>
 <!--    @ LOGIN FORM end ======================-->
 </div>

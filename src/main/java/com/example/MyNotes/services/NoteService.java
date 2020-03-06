@@ -26,7 +26,15 @@ public class NoteService {
         this.userService = userService;
     }
 
-    public Note save(Note note) {
+    public Note save(String title, String body, String username) {
+        User userFromDb = userService.findByUsername(username);
+        if(title.length() == 0) {
+            title = "Empty title";
+            if(body.length() != 0) {
+                title = body.substring(0, (Math.min(body.length(), 10)));
+            }
+        }
+        Note note = new Note(title, body, userFromDb);
         return noteRepository.save(note);
     }
 
@@ -44,8 +52,4 @@ public class NoteService {
         User userFromDb = userService.findByUsername(username);
         return noteRepository.findAll(Specification.where(hasUser(userFromDb)).and(titleContains(keyword)).or(bodyContains(keyword)));
     }
-
-//    public Page<Note> getNotesPageable(Pageable pageable) {
-//        return noteRepository.findAll(pageable);
-//    }
 }

@@ -21,7 +21,7 @@ public class Note {
     @Column(name = "title")
     private String title;
 
-    @Column(nullable = false, name = "body")
+    @Column(name = "body")
     private String body;
 
     @Column(name = "creation_date", updatable = false)
