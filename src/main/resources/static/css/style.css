@@ -1,9 +1,9 @@
-.login-container {
+.mycontainer {
   height: 100vh;
   display: flex;
 }
 .viewbox {
-  background-color: purple;
+  background-color: white;
   flex: 1 1 auto;
 }
 .login-form {
@@ -14,8 +14,49 @@
   height: auto;
   flex: 0 0 auto;
   height: 100%;
+  /* background-color: lightskyblue; */
+  border-left: 1px solid lightslategray;
+  /* box-shadow: 0 0 10px #007bff; */
 }
 
-.login-form h4 {
-  padding-bottom: 40px;
+.myBtn {
+  cursor: pointer;
+  border: none;
+  padding: 1rem;
+  border-bottom: 3px solid;
+}
+
+.myBtn-light {
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  transition: all 0.2s ease-in-out;
+}
+
+.myBtn-light:hover {
+  color: #6c757d;
+  background-color: white;
+  border-color: #6c757d;
+  transition: all 0.2s ease-in-out;
+}
+
+.myBtn-danger {
+  color: white !important;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  transition: all 0.2s ease-in-out;
+}
+
+.myBtn-danger:hover {
+  color: #dc3545 !important;
+  background-color: white;
+  border-color: #dc3545;
+  transition: all 0.2s ease-in-out;
+}
+
+.myForm {
+  font-style: italic;
+  border: none;
+  padding: 0.75rem;
+  margin: 0em;
 }

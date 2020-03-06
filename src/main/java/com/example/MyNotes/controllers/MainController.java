@@ -25,6 +25,7 @@ public class MainController {
             } else {
                 model.addAttribute("notes", noteService.findNoteByUsername(auth.getName()));
             }
+            model.addAttribute("word", word);
         }
         return "notes";
     }
