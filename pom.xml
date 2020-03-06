@@ -52,8 +52,8 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -84,9 +84,14 @@
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
-				<version>5.2.1</version>
+				<version>6.3.0</version>
 				<configuration>
-					<configFile>src/main/resources/flyway.conf</configFile>
+					<url>jdbc:postgresql://localhost:5432/mynotes_db</url>
+					<user>notesapp</user>
+					<password>password</password>
+					<schemas>
+						<schema>public</schema>
+					</schemas>
 				</configuration>
 			</plugin>
 			<plugin>
