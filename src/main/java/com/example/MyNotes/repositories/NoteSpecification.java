@@ -10,10 +10,10 @@ public class NoteSpecification {
     }
 
     public static Specification<Note> titleContains(String keyword) {
-        return (note, cq, cb) -> cb.like(note.get("title"), "%" + keyword + "%");
+        return (note, cq, cb) -> cb.like(cb.lower(note.get("title")), "%" + keyword + "%");
     }
 
     public static Specification<Note> bodyContains(String keyword) {
-        return (note, cq, cb) -> cb.like(note.get("body"), "%" + keyword + "%");
-    }
+        return (note, cq, cb) -> cb.like(cb.lower(note.get("body")), "%" + keyword + "%");
+}
 }
