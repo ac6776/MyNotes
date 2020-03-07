@@ -50,6 +50,6 @@ public class NoteService {
 
     public List<Note> findNotesByUsernameAndKeyword(String username, String keyword){
         User userFromDb = userService.findByUsername(username);
-        return noteRepository.findAll(Specification.where(hasUser(userFromDb)).and(titleContains(keyword)).or(bodyContains(keyword)));
+        return noteRepository.findAll(Specification.where(hasUser(userFromDb).and(titleContains(keyword))).or(hasUser(userFromDb).and(bodyContains(keyword))));
     }
 }
